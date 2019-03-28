@@ -1,24 +1,3 @@
-## Slack Checker
-
-Run once to get alive list.
-
-```ruby
-ruby check.rb
-```
-
-Run again and checks who is dead:
-
-```ruby
-ruby check.rb
-```
-
-Sample outputs:
-```
-$ ruby check.rb
-ALMOST!!
-```
-```
-$ ruby check.rb
 
                       :::!~!!!!!:.
                   .xUHWH!! !!?M88WHX:.
@@ -40,11 +19,3 @@ W$@@M!!! .!~~ !!     .:XUW$W!~ `"~:    :
 Wi.~!X$?!-~    : ?$$$B$Wu("**$RM!
 $R@i.~~ !     :   ~$$$$$B$$en:``
 ?MXT@Wx.~    :     ~"##*$$$$M~
-
-
-
-    OMG!
-
-
-2019-03-28 16:54:28 felipe.tuy IS DEAD!!!!
-```

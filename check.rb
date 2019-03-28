@@ -25,7 +25,8 @@ dead = last_alive - alive
 if dead.empty?
   puts "ALMOST!!"
 else
-  puts "OMG!"
+  File.open('death', 'r').readlines.each { |l| puts l }
+  puts "\n\n\n\t\tOMG!\n\n\n"
   dead.each do |d|
     dead_data = members_data.find { |u| u[:name] == d }
     death_time = Time.at(dead_data[:updated]).strftime("%F %T")
