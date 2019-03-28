@@ -20,5 +20,5 @@ ALMOST!!
 ```
 $ ruby check.rb
 OMG!
-felipe.tuy IS DEAD!!!!
+2019-03-28 16:54:28 felipe.tuy IS DEAD!!!!
 ```
