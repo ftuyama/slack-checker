@@ -1,15 +1,8 @@
 require 'httparty'
 require 'pry-rails'
+load 'slack.rb'
 
-slack_token = ENV['SLACK_TOKEN']
-
-headers = {
-  'Content-Type' => 'application/json',
-  'Accept' => 'application/json',
-  'Authorization' => "Bearer #{slack_token}",
-}
-
-response = HTTParty.get("https://slack.com/api/users.list", headers: headers)
+response = Slack.get_users()
 
 last_alive = File.open('alive.txt').readlines.map(&:strip)
 
