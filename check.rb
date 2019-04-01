@@ -1,6 +1,7 @@
 require 'httparty'
 require 'pry-rails'
 load 'slack.rb'
+load 'funeral_call.rb'
 
 response = Slack.get_users()
 
@@ -23,15 +24,15 @@ end.compact!.sort!
 dead = last_alive - alive
 
 if dead.empty?
-  puts "ALMOST!!"
+  FuneralCall.send_message("ALMOST!! No one is dead!")
 else
-  File.open('death', 'r').readlines.each { |l| puts l }
-  puts "\n\n\n\t\tOMG!\n\n\n"
+  FuneralCall.print_skull()
+  FuneralCall.send_message("\n\n\n\t\tOMG!\n\n\n")
   dead.each do |d|
     dead_data = members_data.find { |u| u[:name] == d }
     death_time = Time.at(dead_data[:updated]).strftime("%F %T")
 
-    puts "#{death_time} #{d} IS DEAD!!!!"
+    FuneralCall.send_message("#{death_time} #{d} IS DEAD!!!!")
   end
 end
 

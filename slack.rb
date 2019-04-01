@@ -2,12 +2,20 @@ class Slack
   SLACK_TOKEN = ENV['SLACK_TOKEN']
 
   def self.get_users
+    HTTParty.get("https://slack.com/api/users.list", headers: headers())
+  end
+
+  def self.send_message(text)
+    HTTParty.get("https://slack.com/api/chat.postMessage?channel=yomi&text=#{text}", headers: headers('text/plain; charset=utf-8'))
+  end
+
+  private
+
+  def self.headers(content_type = 'application/json')
     headers = {
-      'Content-Type' => 'application/json',
+      'Content-Type' => content_type,
       'Accept' => 'application/json',
       'Authorization' => "Bearer #{SLACK_TOKEN}",
     }
-
-    HTTParty.get("https://slack.com/api/users.list", headers: headers)
   end
 end

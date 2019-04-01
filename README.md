@@ -48,3 +48,11 @@ $R@i.~~ !     :   ~$$$$$B$$en:``
 
 2019-03-28 16:54:28 felipe.tuy IS DEAD!!!!
 ```
+
+### Slack funeral call
+
+A slack channel may be notified by using:
+
+```
+SLACK_ACTIVE=true ruby check.rb
+```
