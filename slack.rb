@@ -6,7 +6,8 @@ class Slack
   end
 
   def self.send_message(text)
-    HTTParty.get("https://slack.com/api/chat.postMessage?channel=yomi&text=#{text}", headers: headers('text/plain; charset=utf-8'))
+    params = "?channel=yomi&text=#{CGI::escape(text)}"
+    HTTParty.get("https://slack.com/api/chat.postMessage#{params}", headers: headers('text/plain; charset=utf-8'))
   end
 
   private
