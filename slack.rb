@@ -18,14 +18,15 @@ class Slack
     HTTParty.get("https://slack.com/api/chat.postMessage", query: params, headers: headers('text/plain; charset=utf-8'))
   end
 
-  def self.send_image(image_url, label = "")
+  def self.send_image(image_url, label: "", actions: [])
     return unless SLACK_ACTIVE
 
     attachments = [{
       "fallback": ":skull:",
       "text": ":skull: #{label}",
       "image_url": image_url,
-      "thumb_url": image_url
+      "thumb_url": image_url,
+      "actions": actions,
     }]
 
     params = {
