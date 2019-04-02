@@ -10,6 +10,7 @@ last_alive = File.open('alive.txt').readlines.map(&:strip)
 members_data = response["members"].map do |m|
   {
     name: m["name"] || m["profile"]["real_name"] || m["real_name"],
+    picture: m["profile"]["image_72"],
     deleted: m["deleted"],
     updated: m["updated"]
   }
@@ -32,7 +33,7 @@ else
     dead_data = members_data.find { |u| u[:name] == d }
     death_time = Time.at(dead_data[:updated]).strftime("%F %T")
 
-    FuneralCall.send_message("#{death_time} #{d} IS DEAD!!!!")
+    FuneralCall.send_death_message("#{death_time} #{d} IS DEAD!!!!", dead_data)
   end
 end
 
