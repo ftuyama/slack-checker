@@ -1,5 +1,4 @@
 class FuneralCall
-  SKULL_ART = "```" + File.open('death', 'r').readlines.join() + "```"
 
   def self.send_message(message)
     Slack.send_message(message)
@@ -15,9 +14,13 @@ class FuneralCall
   end
 
   def self.print_skull
-    Slack.send_message(SKULL_ART)
+    Slack.send_message(skull_art())
 
-    puts SKULL_ART
+    puts skull_art()
+  end
+
+  def self.skull_art
+    "```" + File.open("ascii/death#{rand(3)}", 'r').readlines.join() + "```"
   end
 
   def self.funeral_actions
