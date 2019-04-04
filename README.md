@@ -1,12 +1,12 @@
 ## Slack Checker
 
-Run once to get alive list.
+Run once to get alive members list.
 
 ```ruby
 ruby check.rb
 ```
 
-Run again and checks who is dead:
+Run again and checks members who died:
 
 ```ruby
 ruby check.rb
@@ -55,4 +55,12 @@ A slack channel may be notified by using:
 
 ```
 SLACK_TOKEN=xxx ruby check.rb
+```
+
+### Graveyard check
+
+One can check last month deaths using:
+
+```
+ruby graveyard.rb
 ```

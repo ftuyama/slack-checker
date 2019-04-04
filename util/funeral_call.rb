@@ -6,21 +6,31 @@ class FuneralCall
     puts message
   end
 
-  def self.send_death_message(message, data)
-    Slack.send_image(data[:picture], label: data[:name], actions: funeral_actions())
+  def self.send_death_message(dead_name, dead_picture, death_time)
+    message = "#{death_time} #{dead_name} IS DEAD!!!!"
+
+    Slack.send_image(dead_picture, label: dead_name, actions: funeral_actions())
     Slack.send_message(message)
 
     puts message
   end
 
-  def self.print_skull
-    Slack.send_message(skull_art())
+  def self.print_art(ascii_art_name)
+    ascii_art = send(ascii_art_name)
 
-    puts skull_art()
+    Slack.send_message(ascii_art)
+
+    puts ascii_art
   end
 
-  def self.skull_art
+  private
+
+  def self.skull
     "```" + File.open("ascii/death#{rand(3)}", 'r').readlines.join() + "```"
+  end
+
+  def self.grave
+    "```" + File.open("ascii/grave", 'r').readlines.join() + "```"
   end
 
   def self.funeral_actions
