@@ -6,8 +6,8 @@ class FuneralCall
     puts message
   end
 
-  def self.send_death_message(dead_name, dead_picture, death_time)
-    message = "#{death_time} #{dead_name} IS DEAD!!!!"
+  def self.send_death_message(dead_name, dead_picture, dead_profile)
+    message = "#{dead_profile} IS DEAD!!!!"
 
     Slack.send_image(dead_picture, label: dead_name, actions: funeral_actions())
     Slack.send_message(message)
