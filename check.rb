@@ -1,11 +1,12 @@
 require 'httparty'
 require 'pry-rails'
-load 'slack.rb'
-load 'funeral_call.rb'
+load 'util/db.rb'
+load 'util/funeral_call.rb'
+load 'util/slack.rb'
 
 response = Slack.get_users()
 
-last_alive = File.open('alive.txt').readlines.map(&:strip)
+last_alive = DB.load()
 
 members_data = response["members"].map do |m|
   {
@@ -37,4 +38,4 @@ else
   end
 end
 
-File.open("alive.txt", "w+") { |f| f.puts(alive) }
+DB.save(alive)

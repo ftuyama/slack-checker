@@ -1,6 +1,5 @@
 class Slack
-  SLACK_ACTIVE = ENV['SLACK_ACTIVE']
-  SLACK_CHANNEL = 'yomi'
+  SLACK_CHANNEL = ENV['SLACK_CHANNEL'] || 'yomi'
   SLACK_TOKEN = ENV['SLACK_TOKEN']
 
   def self.get_users
@@ -8,7 +7,7 @@ class Slack
   end
 
   def self.send_message(text)
-    return unless SLACK_ACTIVE
+    return unless SLACK_TOKEN
 
     params = {
       channel: SLACK_CHANNEL,
@@ -19,7 +18,7 @@ class Slack
   end
 
   def self.send_image(image_url, label: "", actions: [])
-    return unless SLACK_ACTIVE
+    return unless SLACK_TOKEN
 
     attachments = [{
       "fallback": ":skull:",

@@ -54,5 +54,5 @@ $R@i.~~ !     :   ~$$$$$B$$en:``
 A slack channel may be notified by using:
 
 ```
-SLACK_ACTIVE=true ruby check.rb
+SLACK_TOKEN=xxx ruby check.rb
 ```
