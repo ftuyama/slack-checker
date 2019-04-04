@@ -1,7 +1,7 @@
 class FuneralCall
 
-  def self.send_message(message)
-    Slack.send_message(message)
+  def self.send_message(message, probability: 1)
+    Slack.send_message(message) if rand(probability) == 0
 
     puts message
   end

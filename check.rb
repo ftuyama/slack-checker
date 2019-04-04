@@ -25,7 +25,7 @@ end.compact!.sort!
 dead = last_alive - alive
 
 if dead.empty?
-  FuneralCall.send_message("ALMOST!! No one is dead!")
+  FuneralCall.send_message("ALMOST!! No one is dead!", probability: 10)
 else
   FuneralCall.print_skull()
   FuneralCall.send_message("\n\n\n\t\tOMG!\n\n\n")
