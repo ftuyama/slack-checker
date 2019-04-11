@@ -5,7 +5,9 @@ load 'util/db.rb'
 load 'util/funeral_call.rb'
 load 'util/slack.rb'
 
-last_alive = DB.load()
+@db = DB.new
+
+last_alive = @db.load()
 
 members = Slack.get_users()["members"].map { |data| Member.new(data) }
 

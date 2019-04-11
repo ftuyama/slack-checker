@@ -1,9 +1,21 @@
+require 'httparty'
+
 class Slack
+  EARS_CHANNEL = ENV['EARS_CHANNEL']
   SLACK_CHANNEL = ENV['SLACK_CHANNEL'] || 'yomi'
   SLACK_TOKEN = ENV['SLACK_TOKEN']
 
   def self.get_users
     HTTParty.get("https://slack.com/api/users.list", headers: headers())
+  end
+
+  def self.get_messages
+    params = {
+      channel: EARS_CHANNEL,
+      limit: 50
+    }
+
+    HTTParty.get("https://slack.com/api/conversations.history", query: params, headers: headers())
   end
 
   def self.send_message(text)
