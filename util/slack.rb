@@ -24,7 +24,7 @@ class Slack
     params = {
       channel: SLACK_CHANNEL,
       text: text
-    }
+    }.merge!(self.bot_identity)
 
     HTTParty.get("https://slack.com/api/chat.postMessage", query: params, headers: headers('text/plain; charset=utf-8'))
   end
@@ -37,18 +37,26 @@ class Slack
       "text": ":skull: #{label}",
       "image_url": image_url,
       "thumb_url": image_url,
-      "actions": actions,
+      "actions": actions
     }]
 
     params = {
       channel: SLACK_CHANNEL,
       attachments: attachments.to_json
-    }
+    }.merge!(self.bot_identity)
 
     HTTParty.get("https://slack.com/api/chat.postMessage", query: params, headers: headers('text/plain; charset=utf-8'))
   end
 
   private
+
+  def self.bot_identity
+    {
+      as_user: false,
+      username: "death",
+      icon_url: "https://image.flaticon.com/icons/png/512/12/12231.png",
+    }
+  end
 
   def self.headers(content_type = 'application/json')
     headers = {
