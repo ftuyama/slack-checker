@@ -1,1 +1,1 @@
-SLACK_ACTIVE=true ruby check.rb
+ruby check.rb
