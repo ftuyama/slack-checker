@@ -1,1 +1,1 @@
-ruby check.rb
+SLACK_CHANNEL=yomi ruby check.rb

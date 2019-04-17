@@ -2,7 +2,7 @@ require 'httparty'
 
 class Slack
   EARS_CHANNEL = ENV['EARS_CHANNEL']
-  SLACK_CHANNEL = ENV['SLACK_CHANNEL'] || 'yomi'
+  SLACK_CHANNEL = ENV['SLACK_CHANNEL'] || 'testea'
   SLACK_TOKEN = ENV['SLACK_TOKEN']
 
   def self.get_users
