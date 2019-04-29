@@ -4,7 +4,7 @@ class Member
   def initialize(data)
     @name = data["name"] || data["profile"]["real_name"] || data["real_name"]
     @title = data["profile"]["title"]
-    @picture = data["profile"]["image_72"]
+    @picture = data["profile"]["image_192"]
     @deleted = data["deleted"]
     @updated = data["updated"]
   end
