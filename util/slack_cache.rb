@@ -19,6 +19,8 @@ class SlackCache
       Slack.get_messages["messages"]
     when :users
       Slack.get_users["members"]
+    when :channels
+      Slack.get_channels["groups"]
     end
   end
 end

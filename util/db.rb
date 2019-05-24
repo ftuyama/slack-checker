@@ -1,6 +1,7 @@
 class DB
   FILES = {
     alive: 'db/alive.txt',
+    channels: 'db/channels.txt',
     messages: 'db/messages.txt',
     users: 'db/users.txt',
   }
@@ -29,7 +30,11 @@ class DB
   end
 
   def date
-    File.mtime(self.file)
+    begin
+      File.mtime(self.file)
+    rescue
+      Time.parse("1994-11-10") # beginning of time
+    end
   end
 
   def older_than(time_elapsed)

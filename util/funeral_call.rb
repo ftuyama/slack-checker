@@ -10,7 +10,11 @@ class FuneralCall
     message = "#{dead_profile} IS DEAD!!!!"
 
     Slack.send_image(dead_picture, label: dead_name, actions: funeral_actions())
-    Slack.send_message(message)
+    Slack.send_message(message).tap do |slack_message|
+      Slack.react(slack_message["ts"], "ok")
+      Slack.react(slack_message["ts"], "crying_cat_face")
+      Slack.react(slack_message["ts"], "no")
+    end
 
     puts message
   end

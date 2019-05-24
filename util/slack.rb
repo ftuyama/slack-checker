@@ -5,6 +5,15 @@ class Slack
   SLACK_CHANNEL = ENV['SLACK_CHANNEL'] || 'testea'
   SLACK_TOKEN = ENV['SLACK_TOKEN']
 
+  def self.get_channels
+    HTTParty.get("https://slack.com/api/groups.list", headers: headers())
+  end
+
+  def self.channel_id(channel)
+    channels = SlackCache.fetch(:channels)
+    channels.find { |channel| channel["name"] == "testea" }["id"]
+  end
+
   def self.get_users
     HTTParty.get("https://slack.com/api/users.list", headers: headers())
   end
@@ -27,6 +36,18 @@ class Slack
     }.merge!(self.bot_identity)
 
     HTTParty.get("https://slack.com/api/chat.postMessage", query: params, headers: headers('text/plain; charset=utf-8'))
+  end
+
+  def self.react(message_timestamp, reaction)
+    return unless SLACK_TOKEN
+
+    params = {
+      channel: channel_id(SLACK_CHANNEL),
+      name: reaction,
+      timestamp: message_timestamp
+    }.to_json
+
+    HTTParty.post("https://slack.com/api/reactions.add", body: params, headers: headers('application/json; charset=utf-8'))
   end
 
   def self.send_image(image_url, label: "", actions: [])
