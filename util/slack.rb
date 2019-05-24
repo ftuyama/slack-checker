@@ -11,7 +11,7 @@ class Slack
 
   def self.channel_id(channel)
     channels = SlackCache.fetch(:channels)
-    channels.find { |channel| channel["name"] == "testea" }["id"]
+    channels.find { |c| c["name"] == channel }["id"]
   end
 
   def self.get_users
