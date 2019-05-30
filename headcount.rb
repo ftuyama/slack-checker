@@ -32,8 +32,7 @@ members.each do |member|
   end
 end
 
-binding.pry
-FuneralCall.print_art(:grave)
+FuneralCall.print_art(:head)
 FuneralCall.send_message("\n\n\t[HEADCOUNT] ( *+#{month_births.count}* | *#{month_deaths.count}* )\n\n")
 FuneralCall.send_message("\n\n\t:skull: Members who died last month :skull:\n\n")
 FuneralCall.send_message(month_deaths.join("\n"))
