@@ -1,9 +1,10 @@
 class DB
   FILES = {
     alive: 'db/alive.txt',
-    channels: 'db/channels.txt',
-    messages: 'db/messages.txt',
-    users: 'db/users.txt',
+    channels: 'db/channels.json',
+    messages: 'db/messages.json',
+    profile: 'db/profile/',
+    users: 'db/users.json',
   }
 
   attr_accessor :file
