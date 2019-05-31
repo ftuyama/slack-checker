@@ -1,12 +1,13 @@
 load 'util/slack.rb'
 
 class SlackCache
+  LONG_CACHE_TIME = 86400 * 7
   CACHE_TIME = 10 * 60
 
   def self.fetch_with_params(content, id)
     @db = DB.new(DB::FILES[content] + "#{id}.json")
 
-    if @db.older_than(CACHE_TIME)
+    if @db.older_than(LONG_CACHE_TIME)
       @db.save_json(request_slack_with_params(content, id))
     else
       @db.load_json

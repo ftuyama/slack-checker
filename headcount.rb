@@ -32,9 +32,12 @@ members.each do |member|
   end
 end
 
+month_births.sort!
+month_deaths.sort!
+
 FuneralCall.print_art(:head)
-FuneralCall.send_message("\n\n\t[HEADCOUNT] ( *+#{month_births.count}* | *#{month_deaths.count}* )\n\n")
+FuneralCall.send_message("\n\n[HEADCOUNT] ( *+#{month_births.count}* | *-#{month_deaths.count}* )\n\n")
 FuneralCall.send_message("\n\n\t:skull: Members who died last month :skull:\n\n")
-FuneralCall.send_message(month_deaths.join("\n"))
-FuneralCall.send_message("\n\n\t:skull: Members who were born last month :skull:\n\n")
-FuneralCall.send_message(month_births.join("\n"))
+FuneralCall.send_message("```" + month_deaths.join("\n") + "```")
+FuneralCall.send_message("\n\n\t:angel: Members who were born last month :angel:\n\n")
+FuneralCall.send_message("```" + month_births.join("\n") + "```")
