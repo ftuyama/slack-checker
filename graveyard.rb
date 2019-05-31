@@ -15,7 +15,7 @@ last_month = (Time.now - 86500*30).to_i
 
 month_deaths = members.map do |member|
   if member.deleted && member.updated > last_month
-    member.profile
+    member.profile_label
   end
 end.compact!.sort!
 

@@ -4,6 +4,7 @@ class Slack
   EARS_CHANNEL = ENV['EARS_CHANNEL']
   SLACK_CHANNEL = ENV['SLACK_CHANNEL'] || 'testea'
   SLACK_TOKEN = ENV['SLACK_TOKEN']
+  SUPER_SLACK_TOKEN = ENV['SUPER_SLACK_TOKEN']
 
   def self.get_channels
     HTTParty.get("https://slack.com/api/groups.list", headers: headers())
@@ -26,6 +27,15 @@ class Slack
 
     HTTParty.get("https://slack.com/api/conversations.history", query: params, headers: headers())
   end
+
+  def self.get_profile(user_id)
+    params = {
+      user: user_id
+    }
+
+    HTTParty.get("https://slack.com/api/users.profile.get", query: params, headers: headers(token: SUPER_SLACK_TOKEN))
+  end
+
 
   def self.send_message(text)
     return unless SLACK_TOKEN
@@ -79,11 +89,11 @@ class Slack
     }
   end
 
-  def self.headers(content_type = 'application/json')
+  def self.headers(content_type = 'application/json', token: SLACK_TOKEN)
     headers = {
       'Content-Type' => content_type,
       'Accept' => 'application/json',
-      'Authorization' => "Bearer #{SLACK_TOKEN}",
+      'Authorization' => "Bearer #{token}",
     }
   end
 end

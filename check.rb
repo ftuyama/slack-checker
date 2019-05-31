@@ -26,7 +26,7 @@ else
   dead.each do |dead_name|
     dead_member = members.find { |member| member.name == dead_name }
     if dead_member
-      FuneralCall.send_death_message(dead_name, dead_member.picture, dead_member.profile)
+      FuneralCall.send_death_message(dead_name, dead_member.picture, dead_member.profile_label)
     else
       FuneralCall.send_message("\n\n\n\t\t#{dead_name} died!\n\n\n")
     end

@@ -37,6 +37,10 @@ class FuneralCall
     "```" + File.open("ascii/grave", 'r').readlines.join() + "```"
   end
 
+  def self.head
+    "```" + File.open("ascii/head", 'r').readlines.join() + "```"
+  end
+
   def self.funeral_actions
     [
       {
