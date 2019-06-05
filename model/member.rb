@@ -44,6 +44,10 @@ class Member
     "#{death_time} - #{@name} - #{title_badge}"
   end
 
+  def profile_linked_label
+    "#{death_time} - <@#{@id}> - #{title_badge}"
+  end
+
   def title_badge
     unless @title.nil? && @title != ""
       " [#{@title}]"
