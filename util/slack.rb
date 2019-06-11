@@ -6,22 +6,42 @@ class Slack
   SLACK_TOKEN = ENV['SLACK_TOKEN']
   SUPER_SLACK_TOKEN = ENV['SUPER_SLACK_TOKEN']
 
-  def self.get_channels
+  def self.get_groups
     HTTParty.get("https://slack.com/api/groups.list", headers: headers())
   end
 
+  def self.get_channels
+    HTTParty.get("https://slack.com/api/channels.list", headers: headers())
+  end
+
   def self.channel_id(channel)
+    groups = SlackCache.fetch(:groups)
+    group = groups.find { |c| c["name"] == channel }
+    return group["id"] if group
+
     channels = SlackCache.fetch(:channels)
-    channels.find { |c| c["name"] == channel }["id"]
+    channel = channels.find { |c| c["name"] == channel }
+    return channel["id"] if channel
   end
 
   def self.get_users
     HTTParty.get("https://slack.com/api/users.list", headers: headers())
   end
 
-  def self.get_messages
+  def self.delete_message(message_timestamp)
+    return unless SLACK_TOKEN || message_timestamp.nil?
+
     params = {
-      channel: EARS_CHANNEL,
+      channel: channel_id(SLACK_CHANNEL),
+      ts: message_timestamp
+    }.to_json
+
+    HTTParty.post("https://slack.com/api/chat.delete", body: params, headers: headers('application/json; charset=utf-8'))
+  end
+
+  def self.get_messages(channel: nil)
+    params = {
+      channel: channel.nil? ? EARS_CHANNEL : SLACK_CHANNEL,
       limit: 50
     }
 

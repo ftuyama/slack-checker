@@ -38,7 +38,9 @@ class SlackCache
     when :users
       Slack.get_users["members"]
     when :channels
-      Slack.get_channels["groups"]
+      Slack.get_channels["channels"]
+    when :groups
+      Slack.get_groups["groups"]
     end
   end
 end

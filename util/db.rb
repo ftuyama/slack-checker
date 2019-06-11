@@ -2,6 +2,7 @@ class DB
   FILES = {
     alive: 'db/alive.txt',
     channels: 'db/channels.json',
+    groups: 'db/groups.json',
     messages: 'db/messages.json',
     profile: 'db/profile/',
     users: 'db/users.json',
