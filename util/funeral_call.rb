@@ -21,10 +21,10 @@ class FuneralCall
     puts message
   end
 
-  def self.print_art(ascii_art_name)
+  def self.print_art(ascii_art_name, probability: 1)
     ascii_art = send(ascii_art_name)
 
-    Slack.send_message(ascii_art)
+    Slack.send_message(ascii_art) if rand(probability) == 0
 
     puts ascii_art
   end
