@@ -21,7 +21,7 @@ dead = last_alive - alive
 if dead.empty?
   FuneralCall.send_message("ALMOST!! No one is dead!", probability: 10)
 else
-  FuneralCall.print_art(:skull)
+  FuneralCall.print_art(:skull, probability: 10)
   FuneralCall.send_message("\n\n\n\t\tOMG!\n\n\n")
   dead.each do |dead_name|
     dead_member = members.find { |member| member.name == dead_name }
