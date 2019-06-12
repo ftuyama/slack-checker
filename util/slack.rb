@@ -80,8 +80,10 @@ class Slack
     HTTParty.post("https://slack.com/api/reactions.add", body: params, headers: headers('application/json; charset=utf-8'))
   end
 
-  def self.send_image(image_url, label: "", actions: [])
+  def self.send_image(image_url, label: "", reply: nil, actions: [])
     return unless SLACK_TOKEN
+
+    reply = reply.nil? ? {} : {thread_ts: reply}
 
     attachments = [{
       "fallback": ":skull:",
@@ -94,7 +96,7 @@ class Slack
     params = {
       channel: SLACK_CHANNEL,
       attachments: attachments.to_json
-    }.merge!(self.bot_identity)
+    }.merge!(self.bot_identity).merge!(reply)
 
     HTTParty.get("https://slack.com/api/chat.postMessage", query: params, headers: headers('text/plain; charset=utf-8'))
   end
