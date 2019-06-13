@@ -1,5 +1,13 @@
 ## Slack Checker
 
+First, generate a Slack API token using https://api.slack.com/custom-integrations/legacy-tokens
+
+Set up SLACK_TOKEN and SLACK_CHANNEL env variables, so that Slack checker may fetch members list and send the
+output to a custom slack channel.
+
+
+### Running checker
+
 Run once to get alive members list.
 
 ```ruby
@@ -12,11 +20,7 @@ Run again and checks members who died:
 ruby check.rb
 ```
 
-Sample outputs:
-```
-$ ruby check.rb
-ALMOST!!
-```
+Sample output:
 ```
 $ ruby check.rb
 
@@ -42,19 +46,10 @@ $R@i.~~ !     :   ~$$$$$B$$en:``
 ?MXT@Wx.~    :     ~"##*$$$$M~
 
 
-
     OMG!
 
 
 2019-03-28 16:54:28 felipe.tuy IS DEAD!!!!
-```
-
-### Slack funeral call
-
-A slack channel may be notified by using:
-
-```
-SLACK_TOKEN=xxx ruby check.rb
 ```
 
 ### Graveyard check
@@ -63,4 +58,20 @@ One can check last month deaths using:
 
 ```
 ruby graveyard.rb
+```
+
+### Headcount check
+
+One can check headcount diff using:
+
+```
+ruby headcount.rb
+```
+
+### New members check
+
+One can check new slack members using:
+
+```
+ruby news.rb
 ```
