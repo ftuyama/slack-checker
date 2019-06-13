@@ -2,7 +2,7 @@ require 'httparty'
 
 class Slack
   EARS_CHANNEL = ENV['EARS_CHANNEL']
-  SLACK_CHANNEL = ENV['SLACK_CHANNEL'] || 'testea'
+  SLACK_CHANNEL = ENV['SLACK_CHANNEL']
   SLACK_TOKEN = ENV['SLACK_TOKEN']
   SUPER_SLACK_TOKEN = ENV['SUPER_SLACK_TOKEN']
 
@@ -29,7 +29,7 @@ class Slack
   end
 
   def self.delete_message(message_timestamp)
-    return unless SLACK_TOKEN || message_timestamp.nil?
+    return if slack_not_configured || message_timestamp.nil?
 
     params = {
       channel: channel_id(SLACK_CHANNEL),
@@ -58,7 +58,7 @@ class Slack
 
 
   def self.send_message(text)
-    return unless SLACK_TOKEN
+    return if slack_not_configured
 
     params = {
       channel: SLACK_CHANNEL,
@@ -69,7 +69,7 @@ class Slack
   end
 
   def self.react(message_timestamp, reaction)
-    return unless SLACK_TOKEN
+    return if slack_not_configured
 
     params = {
       channel: channel_id(SLACK_CHANNEL),
@@ -81,7 +81,7 @@ class Slack
   end
 
   def self.send_image(image_url, label: "", reply: nil, actions: [])
-    return unless SLACK_TOKEN
+    return if slack_not_configured
 
     reply = reply.nil? ? {} : {thread_ts: reply}
 
@@ -102,6 +102,10 @@ class Slack
   end
 
   private
+
+  def self.slack_not_configured
+    SLACK_TOKEN.nil? || SLACK_CHANNEL.nil?
+  end
 
   def self.bot_identity
     {
