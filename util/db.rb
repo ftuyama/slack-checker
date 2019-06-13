@@ -14,6 +14,16 @@ class DB
     self.file = file
   end
 
+  def safe_load
+    begin
+      load()
+    rescue
+      puts "No such file #{self.file}. Creating."
+      File.new(self.file, "w").close
+      []
+    end
+  end
+
   def load
     File.open(self.file).readlines.map(&:strip)
   end

@@ -6,7 +6,7 @@ load 'util/slack_cache.rb'
 
 @db = DB.new
 
-last_alive = @db.load()
+last_alive = @db.safe_load()
 
 members = SlackCache.fetch(:users).map { |data| Member.new(data) }
 
