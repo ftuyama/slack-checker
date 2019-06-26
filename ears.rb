@@ -3,7 +3,7 @@ require 'pry-rails'
 load 'util/db.rb'
 load 'util/slack_cache.rb'
 
-messages = SlackCache.fetch(:messages)
+messages = Slack.get_messages["messages"]
 users = SlackCache.fetch(:users)
 
 messages.reverse!.each do |message|

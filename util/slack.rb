@@ -41,7 +41,7 @@ class Slack
 
   def self.get_messages(channel: nil)
     params = {
-      channel: channel.nil? ? EARS_CHANNEL : SLACK_CHANNEL,
+      channel: channel.nil? ? channel_id(EARS_CHANNEL) : (SLACK_CHANNEL),
       limit: 50
     }
 
