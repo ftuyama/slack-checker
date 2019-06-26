@@ -20,6 +20,8 @@ messages.reverse!.each do |message|
   text.gsub!("!here", "@here".cyan)
   text.gsub!("!channel", "@channel".cyan)
 
+  # thread = Slack.get_replies(reply: message["ts"])
+
   begin
     puts [time.yellow, user["name"].red, text].join(" ")
   rescue

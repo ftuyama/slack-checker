@@ -48,6 +48,17 @@ class Slack
     HTTParty.get("https://slack.com/api/conversations.history", query: params, headers: headers())
   end
 
+  def self.get_replies(channel: nil, reply: nil)
+    return if reply.nil?
+
+    params = {
+      channel: channel.nil? ? EARS_CHANNEL : SLACK_CHANNEL,
+      thread_ts: reply
+    }
+
+    HTTParty.get("https://slack.com/api/groups.replies", query: params, headers: headers(token: SUPER_SLACK_TOKEN))
+  end
+
   def self.get_profile(user_id)
     params = {
       user: user_id
