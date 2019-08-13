@@ -41,7 +41,7 @@ class Member
   end
 
   def profile_label
-    "#{death_time} - #{@name} - #{title_badge}"
+    "#{death_time} - #{@name.ljust(24, ' ')} - #{title_badge.ljust(40, ' ')} - #{@picture}"
   end
 
   def profile_linked_label
