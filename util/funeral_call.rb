@@ -7,7 +7,7 @@ class FuneralCall
   end
 
   def self.send_death_message(dead_name, dead_picture, dead_profile)
-    message = "#{dead_profile} IS DEAD!!!!"
+    message = "#{dead_profile} IS GONE!!!!"
 
     Slack.send_message(message).tap do |slack_message|
       if slack_message
